@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acherniakovich.android.astrology.AddInformation"
+    android:background="@drawable/background_main"
+    android:orientation="vertical">
+    <TextView
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_margin="7sp"
+        android:textColor="#fff"
+        android:text="Информация о Вас"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_weight="1"
+                    android:text="Ваше имя"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:textColor="#fff"
+                    android:id="@+id/name"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_weight="1"
+                    android:text="Год рождения"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/year"
+                    android:layout_weight="1"
+                    android:text="Год рождения"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_weight="1"
+                    android:text="Страна рождения"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:id="@+id/listViewCountry"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_weight="1"
+                    android:text="Город рождения"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:textColor="#fff"
+                    android:id="@+id/city"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_weight="1"
+                    android:text="Разница времени"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:id="@+id/diffTime"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Мужчина"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Switch
+                    android:id="@+id/sex"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Женщина"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
+    <TableRow
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/save"
+            android:text="Save"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"/>
+        <Button
+            android:id="@+id/close"
+            android:text="Close"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"/>
+    </TableRow>
+</LinearLayout>

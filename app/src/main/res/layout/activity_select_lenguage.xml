@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background_main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="com.acherniakovich.android.astrology.SelectLenguage">
+    <TableRow
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:layout_margin="10sp"
+            android:background="@drawable/eng"
+            android:id="@+id/eng"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_weight="1"
+            android:text="Eng"/>
+        <Button
+            android:layout_margin="10sp"
+            android:id="@+id/rus"
+            android:background="@drawable/rus"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_weight="1"
+            android:text="Rus"/>
+    </TableRow>
+</LinearLayout>
