@@ -3,8 +3,11 @@ package com.acherniakovich.android.astrology;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,8 +40,16 @@ public class Sovmestimost extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_1:
-                Intent intent = new Intent(Sovmestimost.this,SovmResult.class);
-                startActivity(intent);
+                //Log.d(MainActivity.LOG_TAG,dateOfBirdthParthner.getText().toString());
+                if (!dateOfBirdthParthner.getText().toString().equals("Дата рождения партнера")){
+                    Intent intent = new Intent(Sovmestimost.this,SovmResult.class);
+                    intent.putExtra("myYear",myYear);
+                    intent.putExtra("myMonth",myMonth);
+                    intent.putExtra("myDay",myDay);
+                    startActivity(intent);
+                }else{
+                    Snackbar.make(dateOfBirdthParthner,"Выберите дату рождения партнера", BaseTransientBottomBar.LENGTH_LONG).show();
+                }
                 break;
             case R.id.dateOfBirdthParthner:
                 showDialog(DIALOG_DATE);

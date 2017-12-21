@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 public class CustomSwipeAdapter extends PagerAdapter{
 
-    private int [] image_resourcess = {R.drawable.prognoz,R.drawable.sovm,R.drawable.period};
-    private String [] text_resourcess = {"Прогноз","Совместимость","Периоды"};
+    private int [] image_resourcess = {R.drawable.prognoz,R.drawable.sovm};
+    private String [] text_resourcess = {"Прогноз","Совместимость"};
     private Context ctx;
     private LayoutInflater layoutInflater;
 

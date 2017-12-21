@@ -5,10 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,26 +14,26 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
+import com.acherniakovich.android.astrology.classesCalculationPrognoz.CalculationPrognozDay;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class Prognoz extends Activity {
 
     private Spinner dateOfPrognoz;
-    private ArrayList <Integer> list;
-    private Button buttonMap,dateBirdthParthner,sp_1;
+    private ArrayList<Integer> list;
+    private Button buttonMap, dateBirdthParthner, sp_1;
     private int DIALOG_DATE = 1;
     private int DIALOG_DATE_DAY = 2;
 
     int myYear = 2017;
     int myMonth = 1;
     int myDay = 1;
+
+    private TextView text_result_prognoz_day,text_result_prognoz_year;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -72,8 +69,8 @@ public class Prognoz extends Activity {
         // первая вкладка будет выбрана по умолчанию
         tabHost.setCurrentTabByTag("tag1");
 
-        TextView tv1 = (TextView)tabHost.getTabWidget().getChildAt(0).findViewById(android.R.id.title);
-        TextView tv2 = (TextView)tabHost.getTabWidget().getChildAt(1).findViewById(android.R.id.title);
+        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(android.R.id.title);
+        TextView tv2 = (TextView) tabHost.getTabWidget().getChildAt(1).findViewById(android.R.id.title);
         tv1.setTextColor(Color.parseColor("#FFFFFF"));
         tv2.setTextColor(Color.parseColor("#FFFFFF"));
 
@@ -86,30 +83,30 @@ public class Prognoz extends Activity {
     }
 
     private void init() {
-        sp_1 = (Button)findViewById(R.id.et_1);
+        sp_1 = (Button) findViewById(R.id.et_1);
         sp_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog(DIALOG_DATE_DAY);
             }
         });
-        buttonMap = (Button)findViewById(R.id.buttonMap);
+        buttonMap = (Button) findViewById(R.id.buttonMap);
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Prognoz.this,MapsActivity.class);
-                startActivityForResult(intent,1);
+                Intent intent = new Intent(Prognoz.this, MapsActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
         dateOfPrognoz = (Spinner) findViewById(R.id.dateOfPrognoz);
-        ArrayList <String>listOfData = new ArrayList<>();
-        for (int i = 2017; i>=1900;i--){
-            listOfData.add(i+"");
+        ArrayList<String> listOfData = new ArrayList<>();
+        for (int i = 2017; i <= 2099; i++) {
+            listOfData.add(i + "");
         }
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(Prognoz.this,android.R.layout.simple_list_item_1,listOfData);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Prognoz.this, android.R.layout.simple_list_item_1, listOfData);
         dateOfPrognoz.setAdapter(adapter);
 
-        dateBirdthParthner = (Button)findViewById(R.id.dateBirdthParthner);
+        dateBirdthParthner = (Button) findViewById(R.id.dateBirdthParthner);
         dateBirdthParthner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,13 +114,16 @@ public class Prognoz extends Activity {
             }
         });
 
+        text_result_prognoz_day = (TextView)findViewById(R.id.text_result_prognoz_day);
+        text_result_prognoz_year = (TextView)findViewById(R.id.text_result_prognoz_year);
+
     }
 
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_DATE) {
             DatePickerDialog tpd = new DatePickerDialog(this, myCallBack, myYear, myMonth, myDay);
             return tpd;
-        }else if (id == DIALOG_DATE_DAY){
+        } else if (id == DIALOG_DATE_DAY) {
             DatePickerDialog tpd = new DatePickerDialog(this, myCallBack_day, myYear, myMonth, myDay);
             return tpd;
         }
@@ -136,7 +136,7 @@ public class Prognoz extends Activity {
             myYear = year;
             myMonth = monthOfYear;
             myDay = dayOfMonth;
-            dateBirdthParthner.setText(myDay+"."+myMonth+1+"."+myYear);
+            dateBirdthParthner.setText(myDay + "." + myMonth + 1 + "." + myYear);
         }
     };
 
@@ -146,16 +146,16 @@ public class Prognoz extends Activity {
             myYear = year;
             myMonth = monthOfYear + 1;
             myDay = dayOfMonth;
-            sp_1.setText(myDay+"."+myMonth+"."+myYear);
+            sp_1.setText(myDay + "." + myMonth + "." + myYear);
         }
     };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data==null){
+        if (data == null) {
             return;
         }
-        double [] listCoordinates;
+        double[] listCoordinates;
         listCoordinates = data.getDoubleArrayExtra("array");
 
         double latitude = listCoordinates[0];
@@ -165,6 +165,26 @@ public class Prognoz extends Activity {
         String x = formatter.format(latitude);
         String y = formatter.format(longitude);
 
-        buttonMap.setText("Координаты рождения = : " + x+" ; "+y);
+        buttonMap.setText("Координаты рождения = : " + x + " ; " + y);
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.on_day:
+                //рассчет на день
+                if (myDay!=0&&myMonth!=0&&myYear!=0){
+                    CalculationPrognozDay CPD = new CalculationPrognozDay();
+                    String result = CPD.getPrognozDay(myYear,myMonth,myDay,this);
+                    text_result_prognoz_day.setText(result);
+                }
+
+                break;
+            case R.id.on_year:
+                //рассчет на год
+                text_result_prognoz_year.setText(getResources().getTextArray(R.array.result_prognoz_year_array)[0]);
+                break;
+            default:
+                break;
+        }
     }
 }

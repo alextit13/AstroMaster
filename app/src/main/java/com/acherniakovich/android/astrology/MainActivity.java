@@ -1,15 +1,9 @@
 package com.acherniakovich.android.astrology;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,20 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.q42.android.scrollingimageview.ScrollingImageView;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
-import java.util.Locale;
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOG_TAG = "MyLogs";
     private String resultFromSelectLenguage;
@@ -46,7 +27,6 @@ public class MainActivity extends AppCompatActivity
     private ImageView back;
     private ImageView next;
     private FrameLayout frame_layout_container;
-    private ScrollingImageView scrollingBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +40,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this,SelectLenguage.class);
             startActivityForResult(intent,0);
         }
-
-        scrollingBackground = (ScrollingImageView)findViewById(R.id.scrolling_background);
 
         frame_layout_container = (FrameLayout)findViewById(R.id.frame_layout_container);
 
@@ -79,9 +57,6 @@ public class MainActivity extends AppCompatActivity
                     back.setVisibility(View.INVISIBLE);
                     next.setVisibility(View.VISIBLE);
                 }else if (position==1){
-                    back.setVisibility(View.VISIBLE);
-                    next.setVisibility(View.VISIBLE);
-                }else if (position==2){
                     back.setVisibility(View.VISIBLE);
                     next.setVisibility(View.INVISIBLE);
                 }
@@ -131,7 +106,6 @@ public class MainActivity extends AppCompatActivity
             return;
         }
         resultFromSelectLenguage = data.getStringExtra("lenguage");
-        Log.d(LOG_TAG,resultFromSelectLenguage);
 
         if (resultFromSelectLenguage.equals("russian")){
             //all texts on russian
@@ -206,9 +180,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }else if (t.getText().toString().equals("Совместимость")){
             Intent intent = new Intent(MainActivity.this,Sovmestimost.class);
-            startActivity(intent);
-        }else if (t.getText().toString().equals("Периоды")){
-            Intent intent = new Intent(MainActivity.this,Periodi.class);
             startActivity(intent);
         }
     }

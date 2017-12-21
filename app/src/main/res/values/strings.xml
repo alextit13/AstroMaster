@@ -27,4 +27,12 @@
     <string name="plus">Позитивные взаимодействия</string>
     <string name="minus">Проблемные взаимодействия</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="result_prognoz_day_array">
+        <item name="1.1.2017">Просто великолепный день!</item>
+    </string-array>
+
+    <string-array name="result_prognoz_year_array">
+        <item name="good_day">Просто великолепный год!</item>
+    </string-array>
 </resources>
